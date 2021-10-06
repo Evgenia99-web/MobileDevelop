@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MobileDeveloplab2</string>
+    <string name="header_text">Notifications</string>
+    <string name="replays">117 REPLAYS</string>
+    <string name="replay1">Check out awesome updates for Android design kit for Figma. Now more screens and more categories.</string>
+    <string name="replay23">"into component container and with resizing constraints set????"</string>
+    <string name="user1">Roman Kamushken</string>
+    <string name="user2">Tina Turbina</string>
+    <string name="user3">Tomek Kuwalskij</string>
+    <string name="time13">2 days ago</string>
+    <string name="time2">18 minutes ago</string>
+    <string name="profile">Account</string>
+</resources>

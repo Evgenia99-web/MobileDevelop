@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="highHF">56dp</dimen>
+    <dimen name="dp8">8dp</dimen>
+    <dimen name="headImg">40dp</dimen>
+    <dimen name="textSize20">20dp</dimen>
+    <dimen name="headTextW">216dp</dimen>
+    <dimen name="headTextH">24dp</dimen>
+    <dimen name="dp72">72dp</dimen>
+    <dimen name="hBlock1">178dp</dimen>
+    <dimen name="dp16">16dp</dimen>
+    <dimen name="headBlockH">64dp</dimen>
+    <dimen name="dp12">12dp</dimen>
+    <dimen name="dp20">20dp</dimen>
+    <dimen name="textSize14">14dp</dimen>
+    <dimen name="textSize16">16dp</dimen>
+</resources>
