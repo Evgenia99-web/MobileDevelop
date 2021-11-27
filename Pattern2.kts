@@ -1,3 +1,12 @@
+/*
+*  ComputerItem - структурный паттерн компоновщик, который содержит информацию
+*  об состовляющих компьютера и их ценах
+*/
+
+/*
+*  ComputerItem имея данные о составляющих компьютера, выводит мнформацию о них
+*/
+
 interface ComputerItem{
     fun setName(NameItem: String)
     fun Price(): Int
