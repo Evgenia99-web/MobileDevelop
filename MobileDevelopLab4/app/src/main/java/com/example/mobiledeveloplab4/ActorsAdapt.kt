@@ -1,55 +1,65 @@
 package com.example.mobiledeveloplab4
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import coil.transform.RoundedCornersTransformation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mobiledeveloplab4.databinding.ListItemBinding
-import coil.load
 
-class ActorsAdapt(
-    var listperson: List<Person>,
-    private val clickCard: (Person) -> Unit,
-    private val clickCardLike: (Person) -> Unit
-): RecyclerView.Adapter<ActorsAdapt.MyList>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MyList {
+interface ActorsListenerClick{
+    fun clickCard(name: String)
+    fun clickCardLike(name: String)
+}
+
+class ActorsAdapt(private val clickListener: ActorsListenerClick) :
+    RecyclerView.Adapter<ActorsAdapt.ActorsView>() {
+
+    private val actors = mutableListOf<Person>()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addNextActor(nextPerson: Person){
+        actors.add(nextPerson)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun getLastActors(lastPersons: MutableList<Person>){
+        for (nextPerson in lastPersons)
+          actors.add(nextPerson)
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorsView {
+        val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyList(binding, clickCard, clickCardLike)
+        return ActorsView(binding)
     }
 
-    override fun onBindViewHolder(
-        list: MyList,
-        position: Int
-    ) {
-        val person = listperson[position]
-        list.bind(person)
+    override fun onBindViewHolder(list: ActorsView, position: Int) {
+        val person = actors[position]
+        list.bind(person,clickListener)
     }
+
     override fun getItemCount(): Int {
-        return listperson.size
+        return actors.size
     }
-    inner class MyList internal constructor(
-        private val binding: ListItemBinding,
-        private val clickCard: (Person) -> Unit,
-        private val clickCardLike: (Person) -> Unit
-    ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(person: Person) = binding.run{
-            name.text = person.name
-            sex.text = person.sex
-            date.text = person.date
-            text.text = person.text
-            image.load(person.image){
-                transformations(RoundedCornersTransformation(50f))
+
+    class ActorsView(var binding: ListItemBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(person: Person, clickListener: ActorsListenerClick){
+            itemView.setOnClickListener {
+                clickListener.clickCard(person.name)
             }
-            binding.card.setOnClickListener {
-                clickCard.invoke(person)
-            }
-            binding.like.setOnClickListener {
-                clickCardLike.invoke(person)
-                binding.like.setImageResource(R.drawable.ic_like_pass)
+            binding.run {
+                like.setOnClickListener{
+                    clickListener.clickCardLike(person.name)
+                }
+                name.text = person.name
+                sex.text = person.sex
+                date.text = person.date
+                text.text = person.text
             }
         }
     }
+
 }
