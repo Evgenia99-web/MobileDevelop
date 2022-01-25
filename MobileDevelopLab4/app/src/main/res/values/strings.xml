@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MobileDevelopLab4</string>
+    <string name="title">Личности</string>
+    <string name="name">Имя</string>
+    <string name="dates">Годы жизни</string>
+    <string name="text">Информация о личности</string>
+    <string name="sex">Мужчина</string>
+</resources>
