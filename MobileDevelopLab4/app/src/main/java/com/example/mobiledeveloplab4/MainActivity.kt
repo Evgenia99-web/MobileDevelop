@@ -2,7 +2,6 @@ package com.example.mobiledeveloplab4
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobiledeveloplab4.databinding.ActivityMainBinding
@@ -20,7 +19,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.i("[APP]", "Creating Activity")
+        var fragManager = supportFragmentManager
+        var oldFrag = fragManager.findFragmentByTag(AsyncFrag.tag)
+        if (oldFrag == null){
+            frag = AsyncFrag()
+            Log.i("APP","Creating fragment")
+            fragManager.beginTransaction().add(frag!!, AsyncFrag.tag).commit()
+        }
+        else{
+            frag = oldFrag as AsyncFrag
+            Log.i("[APP]", "Find fragment and got last messages")
+            adapt.getLastActors(frag!!.actors)
+        }
+
         adapt = ActorsAdapt(object: ActorsListenerClick{
             override fun clickCard(name: String) {
                 Snackbar.make(binding.root, "Просмотр карточки: ${name}", 600).show()
@@ -31,18 +42,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        var fragManager = supportFragmentManager
-        var oldFrag = fragManager.findFragmentByTag(AsyncFrag.tag)
-        if (oldFrag == null){
-            frag = AsyncFrag()
-            Log.i("APP","Creating fragment")
-            fragManager.beginTransaction().add(frag!!, AsyncFrag.tag).commit()
-        }
-        else{
-           frag = oldFrag as AsyncFrag
-           Log.i("[APP]", "Find fragment and got last messages")
-           adapt.getLastActors(frag!!.actors)
-        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -53,7 +52,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun getNextActor(person: Person){
-        Log.i("[APP]","Got new message")
         adapt.addNextActor(person)
     }
 }

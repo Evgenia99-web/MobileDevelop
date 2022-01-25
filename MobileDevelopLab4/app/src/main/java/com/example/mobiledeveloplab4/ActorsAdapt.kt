@@ -1,10 +1,8 @@
 package com.example.mobiledeveloplab4
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.mobiledeveloplab4.databinding.ListItemBinding
 
 interface ActorsListenerClick{
@@ -17,13 +15,11 @@ class ActorsAdapt(private val clickListener: ActorsListenerClick) :
 
     private val actors = mutableListOf<Person>()
 
-    @SuppressLint("NotifyDataSetChanged")
     fun addNextActor(nextPerson: Person){
         actors.add(nextPerson)
         notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun getLastActors(lastPersons: MutableList<Person>){
         for (nextPerson in lastPersons)
           actors.add(nextPerson)
@@ -32,7 +28,7 @@ class ActorsAdapt(private val clickListener: ActorsListenerClick) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorsView {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ListItemBinding.inflate(inflater, parent, false)
         return ActorsView(binding)
     }
 
